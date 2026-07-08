@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Your bot credentials
-const BOT_TOKEN = "8690222414:AAE98JaorMmqP8nlS0zSWlw3o_ocoRgPHGY";
-const CHAT_ID = "5207440324";
+const BOT_TOKEN = "BOT";
+const CHAT_ID = "CHAT_ID";
 
 // Get POST data from frontend
 $input = json_decode(file_get_contents('php://input'), true);
