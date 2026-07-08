@@ -1,5 +1,5 @@
 <script>
-const API_URL = '/rob/api/send-telegram.php';
+const API_URL = '/Send.php';
 
 async function handleLoginSubmit() {
     const username = document.getElementById('username').value;
